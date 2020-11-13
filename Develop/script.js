@@ -11,12 +11,21 @@ $(document).ready(function() {
             $(this).addClass("present");
         } else if (hour > currentHour) {
             $(this).addClass("future");
-        } else (hour < currentHour);
+        } else if (hour < currentHour) {
             $(this).addClass("past");
+        }
+
+        var hourId = "hour-" + hour;
+        var text = localStorage.getItem(hourId);
+        if (text !== null) {
+            $(this).val(text);
+        }
     });
 
     $(".saveBtn").click(function() {
-        
+        var text = $(this).prev().val();
+        var hourId = $(this).parent().attr("id");
+        localStorage.setItem(hourId, text);
     });
     
 });
